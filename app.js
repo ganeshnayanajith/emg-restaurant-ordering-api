@@ -8,8 +8,10 @@ const cors = require('cors');
 
 const CONSTANT = require('./lib/constant.js');
 const logger = require('./lib/logger');
+const secretConfig = require('./secret-config');
 
 const indexRouter = require('./routes/index');
+const usersRouter = require('./modules/user/user.route');
 
 const BASE_PATH = CONSTANT.API.BASE_PATH;
 
@@ -28,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.disable('x-powered-by');
 
 app.use(`${BASE_PATH}/`, indexRouter);
+app.use(`${BASE_PATH}/users`, usersRouter());
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
