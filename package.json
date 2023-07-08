@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www | npx pino-pretty",
-    "start:dev": "nodemon ./bin/www | npx pino-pretty"
+    "start:dev": "nodemon ./bin/www | npx pino-pretty",
+    "start:no:pino:pretty": "node ./bin/www",
+    "start:dev:no:pino:pretty": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -7,7 +7,7 @@ const loggerMorgan = require('morgan');
 const cors = require('cors');
 
 // TODO: Extra configs
-const pinoHTTP = require('pino-http');
+// const pinoHTTP = require('pino-http');
 
 const CONSTANT = require('./lib/constant.js');
 const logger = require('./lib/logger');
@@ -17,7 +17,7 @@ const { sequelize } = require('./lib/mysql-db-sequelize');
 (async () => {
   try {
     await sequelize.authenticate();
-    logger.info('Database connection has been established successfully.');
+    logger.info('Database connection establishment successful.');
   } catch (error) {
     logger.error(`Unable to connect to the database: ${error}`);
   }
@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.disable('x-powered-by');
 
 // TODO: Extra configs
-app.use(pinoHTTP({ logger }));
+// app.use(pinoHTTP({ logger }));
 
 app.use(`${BASE_PATH}/`, indexRouter);
 app.use(`${BASE_PATH}/users`, usersRouter());
