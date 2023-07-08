@@ -1,3 +1,4 @@
+'use strict';
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -24,8 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
+app.disable('x-powered-by');
 
-app.use(`${BASE_PATH}`, indexRouter);
+app.use(`${BASE_PATH}/`, indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
