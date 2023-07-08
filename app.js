@@ -6,6 +6,9 @@ const cookieParser = require('cookie-parser');
 const loggerMorgan = require('morgan');
 const cors = require('cors');
 
+// TODO: Extra configs
+const pinoHTTP = require('pino-http');
+
 const CONSTANT = require('./lib/constant.js');
 const logger = require('./lib/logger');
 const secretConfig = require('./secret-config');
@@ -38,6 +41,9 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.disable('x-powered-by');
+
+// TODO: Extra configs
+app.use(pinoHTTP({ logger }));
 
 app.use(`${BASE_PATH}/`, indexRouter);
 app.use(`${BASE_PATH}/users`, usersRouter());
