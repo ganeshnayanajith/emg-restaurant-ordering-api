@@ -19,7 +19,7 @@ const { sequelize } = require('./lib/mysql-db-sequelize');
     await sequelize.authenticate();
     logger.info('Database connection establishment successful.');
   } catch (error) {
-    logger.error(`Unable to connect to the database: ${JSON.stringify(error)}`);
+    logger.error(`Unable to connect to the database: ${error}`);
   }
 })();
 

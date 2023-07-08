@@ -2,19 +2,28 @@
 
 const logger = require('../../lib/logger');
 const User = require('./user.model');
+const Utils = require('../../lib/Utils');
 
 class UserService {
   static async register(userData) {
     try {
+
+      const { name, email, password } = userData;
+
       const user = await User.create({
-        name: userData.name,
-        email: userData.email,
-        password: userData.password,
+        name,
+        email,
+        password,
       });
-      logger.info(`User registration successful ${JSON.stringify(user)}`);
-      return Promise.resolve(user);
+
+      const token = await Utils.generateToken({ userId: user.id, name, email });
+
+      logger.info(`User registration successful ${JSON.stringify({ token, user })}`);
+
+      return Promise.resolve({ token, user });
+
     } catch (error) {
-      logger.error(JSON.stringify(error));
+      logger.error(error);
       return Promise.reject(error);
     }
   }

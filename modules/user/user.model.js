@@ -26,7 +26,7 @@ const User = sequelize.define('User', {
 sequelize.sync().then(() => {
   logger.info('User table creation successful');
 }).catch((error) => {
-  logger.error(`Unable to create user table : ${JSON.stringify(error)}`);
+  logger.error(`Unable to create user table : ${error}`);
 });
 
 module.exports = User;
