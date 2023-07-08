@@ -14,9 +14,9 @@ const { sequelize } = require('./lib/mysql-db-sequelize');
 (async () => {
   try {
     await sequelize.authenticate();
-    logger.log(CONSTANT.LOGGER.INFO, 'Database connection has been established successfully.');
+    logger.info('Database connection has been established successfully.');
   } catch (error) {
-    logger.error(CONSTANT.LOGGER.ERROR, `Unable to connect to the database: ${error}`);
+    logger.error(`Unable to connect to the database: ${error}`);
   }
 })();
 
