@@ -11,10 +11,10 @@ class UserService {
         email: userData.email,
         password: userData.password,
       });
-      logger.info(user, 'User registration successful');
+      logger.info(`User registration successful ${JSON.stringify(user)}`);
       return Promise.resolve(user);
     } catch (error) {
-      logger.error(error);
+      logger.error(JSON.stringify(error));
       return Promise.reject(error);
     }
   }
