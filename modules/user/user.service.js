@@ -7,9 +7,9 @@ class UserService {
   static async register(userData) {
     try {
       return Promise.resolve(userData);
-    } catch (e) {
-      logger.log(CONSTANT.LOGGER.ERROR, e);
-      return Promise.reject(e);
+    } catch (error) {
+      logger.error(CONSTANT.LOGGER.ERROR, error);
+      return Promise.reject(error);
     }
   }
 }
