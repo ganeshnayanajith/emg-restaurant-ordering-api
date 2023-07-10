@@ -1,7 +1,7 @@
 'use strict';
 
 const logger = require('../../lib/logger');
-const User = require('./user.model');
+const UserRepository = require('./user.repository');
 const Utils = require('../../lib/Utils');
 const CustomHttpError = require('../../lib/custom-http-error');
 const { HTTP_CODES, ERRORS } = require('../../lib/constant');
@@ -12,7 +12,7 @@ class UserService {
 
       const { name, email, password } = userData;
 
-      const user = await User.create({
+      const user = await UserRepository.createUser({
         name,
         email,
         password,
@@ -35,7 +35,7 @@ class UserService {
 
       const { email, password } = payload;
 
-      const user = await User.findOne({ where: { email, password } });
+      const user = await UserRepository.findUserByEmailAndPassword(email, password);
 
       if (!user) {
         logger.error(`User not found`);

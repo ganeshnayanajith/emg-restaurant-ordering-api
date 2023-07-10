@@ -12,15 +12,10 @@ const cors = require('cors');
 const CONSTANT = require('./lib/constant.js');
 const logger = require('./lib/logger');
 const secretConfig = require('./secret-config');
-const { sequelize } = require('./lib/mysql-db-sequelize');
+const Database = require('./lib/database/mysql-db-sequelize');
 
 (async () => {
-  try {
-    await sequelize.authenticate();
-    logger.info('Database connection establishment successful.');
-  } catch (error) {
-    logger.error(`Unable to connect to the database: ${error}`);
-  }
+  await Database.initialize();
 })();
 
 const indexRouter = require('./routes/index');
