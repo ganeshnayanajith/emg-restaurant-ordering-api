@@ -25,6 +25,7 @@ const { sequelize } = require('./lib/mysql-db-sequelize');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./modules/user/user.route');
+const dishCategoriesRouter = require('./modules/dish-category/dish-category.route');
 
 const BASE_PATH = CONSTANT.API.BASE_PATH;
 
@@ -47,6 +48,7 @@ app.disable('x-powered-by');
 
 app.use(`${BASE_PATH}/`, indexRouter);
 app.use(`${BASE_PATH}/users`, usersRouter());
+app.use(`${BASE_PATH}/dish-category`, dishCategoriesRouter());
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
