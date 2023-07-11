@@ -3,10 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const DishItemController = require('./dish-item.controller');
+const Authenticator = require('../../lib/security/authenticator');
 
-module.exports = () => {
-  router.post('/', DishItemController.createDishItem);
-  router.get('/', DishItemController.getAllDishItems);
+router.post('/', Authenticator, DishItemController.createDishItem);
+router.get('/', DishItemController.getAllDishItems);
 
-  return router;
-};
+module.exports = router;

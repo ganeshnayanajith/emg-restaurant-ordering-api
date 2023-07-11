@@ -43,9 +43,9 @@ app.disable('x-powered-by');
 // app.use(pinoHTTP({ logger }));
 
 app.use(`${BASE_PATH}/`, indexRouter);
-app.use(`${BASE_PATH}/users`, usersRouter());
-app.use(`${BASE_PATH}/dish-category`, dishCategoriesRouter());
-app.use(`${BASE_PATH}/dish-item`, dishItemsRouter());
+app.use(`${BASE_PATH}/users`, usersRouter);
+app.use(`${BASE_PATH}/dish-category`, dishCategoriesRouter);
+app.use(`${BASE_PATH}/dish-item`, dishItemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
