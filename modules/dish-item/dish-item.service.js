@@ -7,8 +7,9 @@ const { HTTP_CODES, ERRORS } = require('../../lib/constant');
 const DishItemRepository = require('./dish-item.repository');
 
 class DishItemService {
-  static async createDishItem(data) {
+  static async createDishItem(data, userId) {
     try {
+      data.userId = userId;
       const result = await DishItemRepository.createDishItem(data);
       return Promise.resolve(result);
     } catch (error) {

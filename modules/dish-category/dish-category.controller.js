@@ -8,7 +8,7 @@ exports.createDishCategory = async (req, res, next) => {
   try {
     const payload = req.body;
     const result = await DishCategoryService.createDishCategory(payload);
-    Utils.successResponse(res, HTTP_CODES.CREATED, 'Categories creation successful', result);
+    Utils.successResponse(res, HTTP_CODES.CREATED, 'Dish category creation successful', result);
   } catch (err) {
     Utils.errorResponse(res, err);
   }
@@ -17,7 +17,7 @@ exports.createDishCategory = async (req, res, next) => {
 exports.getAllCategories = async (req, res, next) => {
   try {
     const result = await DishCategoryService.getAllCategories();
-    Utils.successResponse(res, HTTP_CODES.OK, 'Categories fetching successful', result);
+    Utils.successResponse(res, HTTP_CODES.OK, 'Dish categories fetching successful', result);
   } catch (err) {
     Utils.errorResponse(res, err);
   }
