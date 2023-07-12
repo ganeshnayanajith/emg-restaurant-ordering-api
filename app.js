@@ -22,6 +22,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./modules/user/user.route');
 const dishCategoriesRouter = require('./modules/dish-category/dish-category.route');
 const dishItemsRouter = require('./modules/dish-item/dish-item.route');
+const ordersRouter = require('./modules/order/order.route');
 
 const BASE_PATH = CONSTANT.API.BASE_PATH;
 
@@ -46,6 +47,7 @@ app.use(`${BASE_PATH}/`, indexRouter);
 app.use(`${BASE_PATH}/users`, usersRouter);
 app.use(`${BASE_PATH}/dish-category`, dishCategoriesRouter);
 app.use(`${BASE_PATH}/dish-item`, dishItemsRouter);
+app.use(`${BASE_PATH}/order`, ordersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

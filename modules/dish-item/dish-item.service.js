@@ -27,6 +27,16 @@ class DishItemService {
       return Promise.reject(error);
     }
   }
+
+  static async getDishItemsByIds(ids) {
+    try {
+      const result = await DishItemRepository.getDishItemsByIds(ids);
+      return Promise.resolve(result);
+    } catch (error) {
+      logger.error(error);
+      return Promise.reject(error);
+    }
+  }
 }
 
 module.exports = DishItemService;

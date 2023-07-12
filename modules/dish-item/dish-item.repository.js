@@ -20,6 +20,21 @@ class DishItemRepository {
       return Promise.reject(err);
     }
   }
+
+  static async getDishItemsByIds(ids) {
+    try {
+      const result = await DishItem.findAll({
+        where: {
+          id: {
+            [Op.in]: ids,
+          },
+        },
+      });
+      return Promise.resolve(result);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
 }
 
 module.exports = DishItemRepository;
