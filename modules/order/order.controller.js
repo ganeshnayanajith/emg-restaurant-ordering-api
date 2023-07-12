@@ -23,3 +23,14 @@ exports.getAllOrders = async (req, res, next) => {
     Utils.errorResponse(res, err);
   }
 };
+
+exports.updateOrderStatus = async (req, res, next) => {
+  try {
+    const orderId = parseInt(req.params['orderId']);
+    const status = req.body.status;
+    const result = await OrderService.updateOrderStatus(orderId, status);
+    Utils.successResponse(res, HTTP_CODES.OK, 'Order updating successful', result);
+  } catch (err) {
+    Utils.errorResponse(res, err);
+  }
+};

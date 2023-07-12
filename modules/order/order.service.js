@@ -7,6 +7,7 @@ const { HTTP_CODES, ERRORS } = require('../../lib/constant');
 const OrderRepository = require('./order.repository');
 const OrderItemRepository = require('./order-item.repository');
 const DishItemService = require('../dish-item/dish-item.service');
+const { OrderStatusEnum } = require('../../lib/enums/enum');
 
 class OrderService {
   static async createOrder(data, userId) {
@@ -57,6 +58,7 @@ class OrderService {
         totalPrice,
         totalItemQuantity,
         userId,
+        status: OrderStatusEnum.PENDING,
       };
 
       const orderDetails = await OrderRepository.createOrder(order);
@@ -78,6 +80,20 @@ class OrderService {
   static async getAllOrders() {
     try {
       const result = await OrderRepository.getAllOrders();
+      return Promise.resolve(result);
+    } catch (error) {
+      logger.error(error);
+      return Promise.reject(error);
+    }
+  }
+
+  static async updateOrderStatus(orderId, status) {
+    try {
+      const result = await OrderRepository.updateOrderStatus(orderId, status);
+      if (result[0] === 0) {
+        logger.error(`order updating failed for order id : ${orderId}`);
+        return Promise.reject(new CustomHttpError(HTTP_CODES.BAD_REQUEST, ERRORS.BAD_REQUEST_ERROR, `order updating failed for order id : ${orderId}`));
+      }
       return Promise.resolve(result);
     } catch (error) {
       logger.error(error);

@@ -7,5 +7,6 @@ const Authenticator = require('../../lib/security/authenticator');
 
 router.post('/', Authenticator, OrderController.createOrder);
 router.get('/', OrderController.getAllOrders);
+router.put('/:orderId', OrderController.updateOrderStatus);
 
 module.exports = router;
