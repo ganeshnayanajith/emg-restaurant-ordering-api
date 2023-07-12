@@ -65,7 +65,7 @@ class OrderService {
         orderItem.orderId = orderDetails.id;
       });
 
-      const orderItemsDetails = await OrderItemRepository.createOrderItems(order);
+      const orderItemsDetails = await OrderItemRepository.createOrderItems(orderItems);
 
       return Promise.resolve({ orderDetails, orderItemsDetails });
 
