@@ -3,10 +3,11 @@
 const { HTTP_CODES } = require('../../lib/constant');
 const Utils = require('../../lib/utils');
 const DishCategoryService = require('./dish-category.service');
+const DishCategoryValidator = require('./dish-category.validator');
 
 exports.createDishCategory = async (req, res, next) => {
   try {
-    const payload = req.body;
+    const payload = await DishCategoryValidator.createValidation(req.body);
     const result = await DishCategoryService.createDishCategory(payload);
     Utils.successResponse(res, HTTP_CODES.CREATED, 'Dish category creation successful', result);
   } catch (err) {

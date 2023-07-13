@@ -3,10 +3,11 @@
 const { HTTP_CODES } = require('../../lib/constant');
 const Utils = require('../../lib/utils');
 const DishItemService = require('./dish-item.service');
+const DishItemValidator = require('./dish-item.validator');
 
 exports.createDishItem = async (req, res, next) => {
   try {
-    const payload = req.body;
+    const payload = await DishItemValidator.createValidation(req.body);
     const userId = req.user.userId;
     const result = await DishItemService.createDishItem(payload, userId);
     Utils.successResponse(res, HTTP_CODES.CREATED, 'Dish item creation successful', result);
