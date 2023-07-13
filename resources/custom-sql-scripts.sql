@@ -18,3 +18,4 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 select * from `emg-restaurant`.users;
 select * from `emg-restaurant`.dish_categories;
+select * from `emg-restaurant`.dish_items;
