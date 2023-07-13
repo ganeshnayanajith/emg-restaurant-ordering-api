@@ -21,3 +21,6 @@ select * from `emg-restaurant`.dish_categories;
 select * from `emg-restaurant`.dish_items;
 select * from `emg-restaurant`.dish_items order by createdAt desc;
 select * from `emg-restaurant`.dish_categories order by createdAt desc;
+select * from `emg-restaurant`.orders;
+select * from `emg-restaurant`.order_items;
+select * from `emg-restaurant`.dish_items where id = 31;
