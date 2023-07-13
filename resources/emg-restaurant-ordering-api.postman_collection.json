@@ -287,7 +287,7 @@
 			"response": []
 		},
 		{
-			"name": "report-daily-total-sales Copy",
+			"name": "report-weekly-total-sales",
 			"event": [
 				{
 					"listen": "test",
@@ -332,6 +332,54 @@
 						{
 							"key": "toDate",
 							"value": "2023-07-16"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "report-monthly-total-sales",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/report/monthly-total-sales?year=2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"report",
+						"monthly-total-sales"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2023"
 						}
 					]
 				}

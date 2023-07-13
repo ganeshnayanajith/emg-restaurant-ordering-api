@@ -24,3 +24,13 @@ exports.getWeeklyTotalSales = async (req, res, next) => {
     Utils.errorResponse(res, err);
   }
 };
+
+exports.getMonthlyTotalSales = async (req, res, next) => {
+  try {
+    const { year } = await ReportValidator.getMonthlyTotalSalesValidation(req.query);
+    const result = await ReportService.getMonthlyTotalSales(year);
+    Utils.successResponse(res, HTTP_CODES.OK, 'Monthly total sales report data fetching successful', result);
+  } catch (err) {
+    Utils.errorResponse(res, err);
+  }
+};

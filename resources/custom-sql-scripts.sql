@@ -36,10 +36,26 @@ ORDER BY DATE(`createdAt`) ASC;
 
 
 SELECT DATE_FORMAT(MIN(createdAt), '%Y-%m-%d') AS weekStart, DATE_FORMAT(MAX(createdAt), '%Y-%m-%d') AS weekEnd, SUM(totalPrice) AS totalSales
-FROM orders
+FROM `emg-restaurant`.orders
 WHERE createdAt BETWEEN "2023-07-03T00:00:00.000Z" AND "2023-07-23T00:00:00.000Z"
 GROUP BY YEARWEEK(createdAt, 1);
 
+SELECT DATE_FORMAT(MIN(createdAt), '%Y-%m-%d') AS weekStart, DATE_FORMAT(MAX(createdAt), '%Y-%m-%d') AS weekEnd, SUM(totalPrice) AS totalSales
+FROM `emg-restaurant`.orders
+WHERE createdAt BETWEEN "2023-07-03" AND "2023-07-23"
+GROUP BY YEARWEEK(createdAt, 1);
+
 SELECT SUM(totalPrice) AS totalSales
-FROM orders
+FROM `emg-restaurant`.orders
 WHERE createdAt BETWEEN "2023-07-03T00:00:00.000Z" AND "2023-07-23T00:00:00.000Z";
+
+SELECT MONTH(createdAt) AS month, SUM(totalPrice) AS totalSales
+FROM `emg-restaurant`.orders
+WHERE createdAt BETWEEN '2023-01-01' AND '2023-12-31'
+GROUP BY MONTH(createdAt)
+ORDER BY MONTH(createdAt);
+
+SELECT SUM(totalPrice) AS totalSales
+FROM `emg-restaurant`.orders
+WHERE createdAt like '%12-31%';
+

@@ -96,6 +96,30 @@ class OrderRepository {
       return Promise.reject(err);
     }
   }
+
+  static async getMonthlyTotalSales(year) {
+    try {
+      const results = await Order.findAll({
+        attributes: [
+          [ sequelize.literal('MONTH(createdAt)'), 'month' ],
+          [ sequelize.fn('SUM', sequelize.col('totalPrice')), 'totalSales' ],
+        ],
+        where: {
+          createdAt: {
+            [Op.between]: [ `${year}-01-01`, `${year}-12-31` ],
+          },
+        },
+        group: [ sequelize.literal('MONTH(createdAt)') ],
+        order: [ sequelize.literal('MONTH(createdAt)') ],
+        raw: true,
+      });
+
+      return Promise.resolve(results);
+
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
 }
 
 module.exports = OrderRepository;
