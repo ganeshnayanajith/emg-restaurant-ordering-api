@@ -53,6 +53,24 @@ class UserService {
       return Promise.reject(error);
     }
   }
+
+  static async findUserByIdAndEmail(userId, email) {
+    try {
+
+      const user = await UserRepository.findUserByIdAndEmail(userId, email);
+
+      if (!user) {
+        logger.error(`User not found`);
+        return Promise.reject(new CustomHttpError(HTTP_CODES.UNPROCESSABLE_ENTITY, ERRORS.UNPROCESSABLE_ENTITY_ERROR, 'User not found'));
+      }
+
+      return Promise.resolve(user);
+
+    } catch (error) {
+      logger.error(error);
+      return Promise.reject(error);
+    }
+  }
 }
 
 module.exports = UserService;

@@ -20,6 +20,15 @@ class UserRepository {
       return Promise.reject(err);
     }
   }
+
+  static async findUserByIdAndEmail(id, email) {
+    try {
+      const result = await User.findOne({ where: { id, email } });
+      return Promise.resolve(result);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
 }
 
 module.exports = UserRepository;
