@@ -24,3 +24,12 @@ select * from `emg-restaurant`.dish_categories order by createdAt desc;
 select * from `emg-restaurant`.orders;
 select * from `emg-restaurant`.order_items;
 select * from `emg-restaurant`.dish_items where id = 31;
+
+select * from `emg-restaurant`.orders where createdAt like '%2022-07-13%';
+select sum(`totalPrice`) from `emg-restaurant`.orders where createdAt like '%2022-07-13%';
+
+SELECT DATE(`createdAt`) AS `date`, SUM(`totalPrice`) AS `totalSales`
+FROM `orders`
+WHERE `createdAt` BETWEEN '2022-01-01' AND '2024-01-01'
+GROUP BY DATE(`createdAt`)
+ORDER BY DATE(`createdAt`) ASC;
