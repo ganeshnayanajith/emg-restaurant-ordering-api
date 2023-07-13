@@ -92,6 +92,8 @@ const getOrdersAndOrderItems = (users, dishItems) => {
 
     // selecting a random user id within inserted data (100 users currently saved in the database)
     const userId = Math.floor(Math.random() * 100) + 1;
+    // random date for the order
+    const date = faker.date.past();
     // consider a user can have items in the order between 1 and 5
     const totalItemQuantity = Math.floor(Math.random() * 5) + 1;
     let totalPrice = 0;
@@ -120,8 +122,8 @@ const getOrdersAndOrderItems = (users, dishItems) => {
           orderId: i,
           dishItemId,
           userId,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          createdAt: date,
+          updatedAt: date,
         };
         orderItemId++;
         currentOrderItems.push(orderItem);
@@ -136,8 +138,8 @@ const getOrdersAndOrderItems = (users, dishItems) => {
       totalPrice,
       status: OrderStatusEnum.COMPLETED,
       userId,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: date,
+      updatedAt: date,
     };
 
     orders.push(order);
