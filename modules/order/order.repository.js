@@ -1,6 +1,7 @@
 'use strict';
 
 const { models: { Order }, Op, sequelize } = require('../../lib/database/mysql-db-sequelize');
+const moment = require('moment');
 
 class OrderRepository {
   static async createOrder(data) {
@@ -63,12 +64,9 @@ class OrderRepository {
   static async getWeeklyTotalSales(fromDate, toDate) {
     try {
       // reset the first monday's date to the fromDate of the given date range
-      const startOfWeek = new Date(fromDate);
-      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1);
-
+      const startOfWeek = moment(fromDate).startOf('isoWeek');
       // reset the last sunday's date to the toDate of the given date range
-      const endOfWeek = new Date(toDate);
-      endOfWeek.setDate(endOfWeek.getDate() + (7 - endOfWeek.getDay()));
+      const endOfWeek = moment(toDate).endOf('isoWeek');
 
       const results = await Order.findAll({
         attributes: [
