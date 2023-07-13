@@ -20,7 +20,7 @@ const ajv = new Ajv();
 
 class ReportValidator {
 
-  static getDailyTotalSalesValidation(data) {
+  static fromDateToDateValidation(data) {
     const validate = ajv.compile(getDailyTotalSalesSchema);
     const valid = validate(data);
     if (!valid) {

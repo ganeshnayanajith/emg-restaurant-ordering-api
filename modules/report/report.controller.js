@@ -7,9 +7,19 @@ const ReportValidator = require('./report.validator');
 
 exports.getDailyTotalSales = async (req, res, next) => {
   try {
-    const { fromDate, toDate } = await ReportValidator.getDailyTotalSalesValidation(req.query);
+    const { fromDate, toDate } = await ReportValidator.fromDateToDateValidation(req.query);
     const result = await ReportService.getDailyTotalSales(fromDate, toDate);
     Utils.successResponse(res, HTTP_CODES.OK, 'Daily total sales report data fetching successful', result);
+  } catch (err) {
+    Utils.errorResponse(res, err);
+  }
+};
+
+exports.getWeeklyTotalSales = async (req, res, next) => {
+  try {
+    const { fromDate, toDate } = await ReportValidator.fromDateToDateValidation(req.query);
+    const result = await ReportService.getWeeklyTotalSales(fromDate, toDate);
+    Utils.successResponse(res, HTTP_CODES.OK, 'Weekly total sales report data fetching successful', result);
   } catch (err) {
     Utils.errorResponse(res, err);
   }

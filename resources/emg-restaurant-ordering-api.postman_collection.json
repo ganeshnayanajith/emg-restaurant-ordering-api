@@ -235,6 +235,110 @@
 			"response": []
 		},
 		{
+			"name": "report-daily-total-sales",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/report/daily-total-sales?fromDate=2022-07-01&toDate=2022-07-20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"report",
+						"daily-total-sales"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2022-07-01"
+						},
+						{
+							"key": "toDate",
+							"value": "2022-07-20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "report-daily-total-sales Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/report/weekly-total-sales?fromDate=2023-07-03&toDate=2023-07-16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"report",
+						"weekly-total-sales"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2023-07-03"
+						},
+						{
+							"key": "toDate",
+							"value": "2023-07-16"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "dish-category-create",
 			"event": [
 				{

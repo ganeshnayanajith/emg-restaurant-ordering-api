@@ -59,6 +59,45 @@ class OrderRepository {
       return Promise.reject(err);
     }
   }
+
+  static async getWeeklyTotalSales(fromDate, toDate) {
+    try {
+      // reset the first monday's date to the fromDate of the given date range
+      const startOfWeek = new Date(fromDate);
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1);
+
+      // reset the last sunday's date to the toDate of the given date range
+      const endOfWeek = new Date(toDate);
+      endOfWeek.setDate(endOfWeek.getDate() + (7 - endOfWeek.getDay()));
+
+      const results = await Order.findAll({
+        attributes: [
+          [ sequelize.fn('DATE_FORMAT', sequelize.fn('MIN', sequelize.col('createdAt')), '%Y-%m-%d'), 'weekStart' ],
+          [ sequelize.fn('DATE_FORMAT', sequelize.fn('MAX', sequelize.col('createdAt')), '%Y-%m-%d'), 'weekEnd' ],
+          [ sequelize.fn('SUM', sequelize.col('totalPrice')), 'totalSales' ],
+        ],
+        where: {
+          createdAt: {
+            [Op.between]: [ startOfWeek, endOfWeek ],
+          },
+        },
+        group: sequelize.literal('YEARWEEK(createdAt, 1)'),
+        order: sequelize.literal('YEARWEEK(createdAt, 1)'),
+        raw: true,
+      });
+
+      const weeklySalesReport = results.map((result) => ({
+        weekStart: result.weekStart,
+        weekEnd: result.weekEnd,
+        totalSales: result.totalSales,
+      }));
+
+      return Promise.resolve(weeklySalesReport);
+
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
 }
 
 module.exports = OrderRepository;

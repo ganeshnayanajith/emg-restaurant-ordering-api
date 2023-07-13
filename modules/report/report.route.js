@@ -6,5 +6,6 @@ const ReportController = require('./report.controller');
 const Authenticator = require('../../lib/security/authenticator');
 
 router.get('/daily-total-sales', ReportController.getDailyTotalSales);
+router.get('/weekly-total-sales', ReportController.getWeeklyTotalSales);
 
 module.exports = router;

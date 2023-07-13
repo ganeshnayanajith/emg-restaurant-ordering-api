@@ -1,7 +1,6 @@
 'use strict';
 
 const logger = require('../../lib/logger');
-const Utils = require('../../lib/Utils');
 const CustomHttpError = require('../../lib/custom-http-error');
 const { HTTP_CODES, ERRORS } = require('../../lib/constant');
 const OrderRepository = require('./order.repository');
@@ -104,6 +103,16 @@ class OrderService {
   static async getDailyTotalSales(fromDate, toDate) {
     try {
       const result = await OrderRepository.getDailyTotalSales(fromDate, toDate);
+      return Promise.resolve(result);
+    } catch (error) {
+      logger.error(error);
+      return Promise.reject(error);
+    }
+  }
+
+  static async getWeeklyTotalSales(fromDate, toDate) {
+    try {
+      const result = await OrderRepository.getWeeklyTotalSales(fromDate, toDate);
       return Promise.resolve(result);
     } catch (error) {
       logger.error(error);

@@ -33,3 +33,13 @@ FROM `orders`
 WHERE `createdAt` BETWEEN '2022-01-01' AND '2024-01-01'
 GROUP BY DATE(`createdAt`)
 ORDER BY DATE(`createdAt`) ASC;
+
+
+SELECT DATE_FORMAT(MIN(createdAt), '%Y-%m-%d') AS weekStart, DATE_FORMAT(MAX(createdAt), '%Y-%m-%d') AS weekEnd, SUM(totalPrice) AS totalSales
+FROM orders
+WHERE createdAt BETWEEN "2023-07-03T00:00:00.000Z" AND "2023-07-23T00:00:00.000Z"
+GROUP BY YEARWEEK(createdAt, 1);
+
+SELECT SUM(totalPrice) AS totalSales
+FROM orders
+WHERE createdAt BETWEEN "2023-07-03T00:00:00.000Z" AND "2023-07-23T00:00:00.000Z";
