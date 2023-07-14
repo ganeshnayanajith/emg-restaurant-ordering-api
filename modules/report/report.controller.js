@@ -34,3 +34,12 @@ exports.getMonthlyTotalSales = async (req, res, next) => {
     Utils.errorResponse(res, err);
   }
 };
+
+exports.getTopSellingItems = async (req, res, next) => {
+  try {
+    const result = await ReportService.getTopSellingItems();
+    Utils.successResponse(res, HTTP_CODES.OK, 'Top selling dish items report data fetching successful', result);
+  } catch (err) {
+    Utils.errorResponse(res, err);
+  }
+};

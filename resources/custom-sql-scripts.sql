@@ -59,3 +59,10 @@ SELECT SUM(totalPrice) AS totalSales
 FROM `emg-restaurant`.orders
 WHERE createdAt like '%12-31%';
 
+SELECT `dishItemId`, COUNT(`dishItemId`) AS `itemCount`, `DishItem`.`dishItemName`
+FROM `order_items` AS `OrderItem`
+LEFT OUTER JOIN `dish_items` AS `DishItem` ON `OrderItem`.`dishItemId` = `DishItem`.`id`
+GROUP BY `dishItemId`
+ORDER BY `dishItemId` ASC;
+
+

@@ -34,6 +34,16 @@ class ReportService {
       return Promise.reject(error);
     }
   }
+
+  static async getTopSellingItems() {
+    try {
+      const result = await OrderService.getTopSellingItems();
+      return Promise.resolve(result);
+    } catch (error) {
+      logger.error(error);
+      return Promise.reject(error);
+    }
+  }
 }
 
 module.exports = ReportService;
