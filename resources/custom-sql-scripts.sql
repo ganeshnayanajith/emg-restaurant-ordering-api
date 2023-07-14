@@ -60,9 +60,14 @@ FROM `emg-restaurant`.orders
 WHERE createdAt like '%12-31%';
 
 SELECT `dishItemId`, COUNT(`dishItemId`) AS `itemCount`, `DishItem`.`dishItemName`
-FROM `order_items` AS `OrderItem`
-LEFT OUTER JOIN `dish_items` AS `DishItem` ON `OrderItem`.`dishItemId` = `DishItem`.`id`
+FROM `emg-restaurant`.`order_items` AS `OrderItem`
+LEFT OUTER JOIN `emg-restaurant`.`dish_items` AS `DishItem` ON `OrderItem`.`dishItemId` = `DishItem`.`id`
 GROUP BY `dishItemId`
 ORDER BY `dishItemId` ASC;
+
+SELECT ROUND(AVG(`totalPrice`), 2) AS `averageTotalPrice`
+FROM `emg-restaurant`.`orders`
+WHERE `createdAt` BETWEEN '2023-07-01' AND '2023-08-01';
+
 
 

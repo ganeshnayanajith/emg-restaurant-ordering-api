@@ -120,6 +120,26 @@ class OrderRepository {
       return Promise.reject(err);
     }
   }
+
+  static async getAverageOrderValue(fromDate, toDate) {
+    try {
+      const result = await Order.findAll({
+        attributes: [
+          [ sequelize.literal('ROUND(AVG(totalPrice), 2)'), 'averageTotalPrice' ],
+        ],
+        where: {
+          createdAt: {
+            [Op.between]: [ fromDate, toDate ],
+          },
+        },
+      });
+
+      return Promise.resolve(result);
+
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
 }
 
 module.exports = OrderRepository;

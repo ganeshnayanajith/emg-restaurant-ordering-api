@@ -139,6 +139,16 @@ class OrderService {
       return Promise.reject(error);
     }
   }
+
+  static async getAverageOrderValue(fromDate, toDate) {
+    try {
+      const result = await OrderRepository.getAverageOrderValue(fromDate, toDate);
+      return Promise.resolve(result);
+    } catch (error) {
+      logger.error(error);
+      return Promise.reject(error);
+    }
+  }
 }
 
 module.exports = OrderService;

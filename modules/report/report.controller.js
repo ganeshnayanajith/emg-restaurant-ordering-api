@@ -43,3 +43,13 @@ exports.getTopSellingItems = async (req, res, next) => {
     Utils.errorResponse(res, err);
   }
 };
+
+exports.getAverageOrderValue = async (req, res, next) => {
+  try {
+    const { fromDate, toDate } = await ReportValidator.fromDateToDateValidation(req.query);
+    const result = await ReportService.getAverageOrderValue(fromDate, toDate);
+    Utils.successResponse(res, HTTP_CODES.OK, 'Average order value report data fetching successful', result);
+  } catch (err) {
+    Utils.errorResponse(res, err);
+  }
+};
