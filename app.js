@@ -6,6 +6,11 @@ const cookieParser = require('cookie-parser');
 const loggerMorgan = require('morgan');
 const cors = require('cors');
 
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const swaggerOptions = require('./lib/swagger').getOptions();
+const specs = swaggerJsdoc(swaggerOptions);
+
 // TODO: Extra configs
 // const pinoHTTP = require('pino-http');
 
@@ -43,6 +48,8 @@ app.disable('x-powered-by');
 
 // TODO: Extra configs
 // app.use(pinoHTTP({ logger }));
+
+app.use(`${BASE_PATH}/docs`, swaggerUi.serve, (...args) => swaggerUi.setup(specs)(...args));
 
 app.use(`${BASE_PATH}/`, indexRouter);
 app.use(`${BASE_PATH}/users`, usersRouter);
