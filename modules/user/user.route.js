@@ -8,6 +8,34 @@ const UserController = require('./user.controller');
  * tags:
  *   name: Users
  *   description: API endpoints for users management
+ * definitions:
+ *   User:
+ *     type: object
+ *     properties:
+ *       id:
+ *         type: number
+ *       name:
+ *         type: string
+ *       email:
+ *         type: string
+ *       password:
+ *         type: string
+ *   SuccessResponse:
+ *     type: object
+ *     properties:
+ *       status:
+ *         type: number
+ *       message:
+ *         type: string
+ *       data:
+ *         type: object
+ *         properties:
+ *           accessToken:
+ *             type: string
+ *           user:
+ *             $ref: '#/definitions/User'
+ *       error:
+ *         type:
  */
 
 /**
@@ -22,6 +50,8 @@ const UserController = require('./user.controller');
  *           schema:
  *             type: object
  *             properties:
+ *               name:
+ *                 type: string
  *               email:
  *                 type: string
  *               password:
@@ -32,14 +62,7 @@ const UserController = require('./user.controller');
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: number
- *                 email:
- *                   type: string
- *                 password:
- *                   type: string
+ *               $ref: '#/definitions/SuccessResponse'
  */
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
