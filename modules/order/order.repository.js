@@ -13,9 +13,13 @@ class OrderRepository {
     }
   }
 
-  static async getAllOrders() {
+  static async getAllOrders(skip, limit) {
     try {
-      const result = await Order.findAndCountAll();
+      const result = await Order.findAndCountAll({
+        order: [ [ 'createdAt', 'DESC' ] ],
+        offset: skip,
+        limit: limit,
+      });
       return Promise.resolve(result);
     } catch (err) {
       return Promise.reject(err);

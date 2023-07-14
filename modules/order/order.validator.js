@@ -41,6 +41,21 @@ const updateSchema = {
   additionalProperties: false,
 };
 
+const getAllSchema = {
+  type: 'object',
+  properties: {
+    skip: {
+      type: 'number',
+      default: 0,
+    },
+    limit: {
+      type: 'number',
+      default: 50,
+    },
+  },
+  additionalProperties: false,
+};
+
 const ajv = new Ajv();
 
 class OrderValidator {
@@ -64,6 +79,17 @@ class OrderValidator {
       throw new CustomHttpError(HTTP_CODES.BAD_REQUEST, ERRORS.VALIDATION_ERROR, validate.errors[0].message);
     } else {
       return data;
+    }
+  }
+
+  static getAllValidation(data) {
+    const validate = ajv.compile(getAllSchema);
+    const valid = validate({ skip: parseInt(data.skip), limit: parseInt(data.limit) });
+    if (!valid) {
+      logger.error(JSON.stringify(validate.errors));
+      throw new CustomHttpError(HTTP_CODES.BAD_REQUEST, ERRORS.VALIDATION_ERROR, validate.errors[0].message);
+    } else {
+      return { skip: parseInt(data.skip), limit: parseInt(data.limit) };
     }
   }
 

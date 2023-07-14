@@ -18,7 +18,8 @@ exports.createOrder = async (req, res, next) => {
 
 exports.getAllOrders = async (req, res, next) => {
   try {
-    const result = await OrderService.getAllOrders();
+    const { skip, limit } = OrderValidator.getAllValidation(req.query);
+    const result = await OrderService.getAllOrders(skip, limit);
     Utils.successResponse(res, HTTP_CODES.OK, 'Orders fetching successful', result);
   } catch (err) {
     Utils.errorResponse(res, err);

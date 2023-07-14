@@ -76,9 +76,9 @@ class OrderService {
     }
   }
 
-  static async getAllOrders() {
+  static async getAllOrders(skip, limit) {
     try {
-      const result = await OrderRepository.getAllOrders();
+      const result = await OrderRepository.getAllOrders(skip, limit);
       return Promise.resolve(result);
     } catch (error) {
       logger.error(error);
