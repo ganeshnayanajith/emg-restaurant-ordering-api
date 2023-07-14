@@ -35,7 +35,7 @@ const UserController = require('./user.controller');
  *           user:
  *             $ref: '#/definitions/User'
  *       error:
- *         type:
+ *         type: null
  */
 
 /**
